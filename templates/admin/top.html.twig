@@ -1,0 +1,60 @@
+{% extends 'admin/dashboard.html.twig' %}
+{% block title %}Top Tiers Racers{% endblock %}
+
+{% block content %}
+<div class="animated fadeIn">
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ path('admin_top') }}" method="post">
+                        <div class="form-group">
+                            <label for="race">Choose a race:</label>
+                            <select id="race" name="race" class="form-control">
+                                <option value="">--Please choose a race--</option>
+                                {% for race in races %}
+                                    <option value="{{ race.name }}">{{ race.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    {{ race }}
+                    <table class="table table-hover" id="top">
+                        <thead>
+                        <th width="20%">#</th>
+                        <th>Racer</th>
+                        </thead>
+                        <tbody>
+                        {% for top in topTiers %}
+                            <tr class="table-light">
+                                <td width="20%">{{ top.position }}</td>
+                                <td><img class="racer-img" src="{{ asset('images/racers/' ~ top.racer.image) }} "> <span class="racer-name"> {{ top.racer.name }}</span></td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <td><a href="{{ path('top_edit', {id: top.id}) }}" class="btn btn-primary">Edit</a></td>
+                                {% endif %}
+                            </tr>
+                        {% else %}
+                            <tr class="table-light">
+                                <td width="20%"></td>
+                                <td>No TopTier Racer for this race ! </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

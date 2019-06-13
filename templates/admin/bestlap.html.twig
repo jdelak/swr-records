@@ -1,0 +1,58 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}List of Best Lap{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-hover responsive" id="ranking">
+                            <thead>
+                            <th>Country</th>
+                            <th>Player</th>
+                            <th>Racer</th>
+                            <th>Race</th>
+                            <th>Time</th>
+                            <th>Crash</th>
+                            <th>Video</th>
+                            </thead>
+                            <tbody>
+                            {% for bestlap in bestlaps %}
+                                <tr class="table-light">
+                                    <td><img src="{{ asset('images/countries/' ~ bestlap.player.country.image) }}"></td>
+                                    <td class="racer-name">{{ bestlap.player.username }}</td>
+                                    <td>{{ bestlap.racer.name }}</td>
+                                    <td class="racer-name">{{ bestlap.race.name }}</td>
+                                    <td>{{ bestlap.time }}</td>
+                                    <td>{{ bestlap.crash }}</td>
+                                    <td><iframe src="{{bestlap.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+                                    <!--<td><a class="btn btn-primary" href="{{ path('bestlap_edit', {id: bestlap.id}) }}">Edit</a></td>-->
+                                </tr>
+                            {% else %}
+                                <tr class="table-light">
+                                    <td>No Records</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#ranking').DataTable({
+                responsive: {
+                    details: false
+                }
+            });
+        } );
+    </script>
+{% endblock javascripts %}

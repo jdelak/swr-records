@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-lg-12 col-md-12 mx-auto">
+	<div class="jumbotron">
+	  <h1 class="">Welcome PodRacers !</h1>
+	  <p class="lead">
+	  	SWR-RECORDS.NET is THE website for Star Wars Episode 1 Racer best records standings.<br>
+	  	Are you the best PodRacer of the Galaxy ? 
+	  </p>
+	  <hr class="my-4">
+	  <p class="lead">
+	    <a class="btn btn-primary btn-lg" href="{{ path('security_registration') }}" role="button">Join Now !</a> and uploads your best laps records !<br>
+	    More informations in the "<a href="{{ path('about') }}">How to be Ranked ?</a>" section.
+	  </p>
+	</div>
+	</div>
+</div>
+{% endblock %}

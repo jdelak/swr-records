@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+	{% block title %}SWR-RECORDS - Registration{% endblock %}
+	{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block content %}
+	<div class="row">
+		<div class="col-lg-10 col-md-10 mx-auto">
+			<div class="card">
+				<div class="card-body">
+					<h2 class="card-title">Registration</h2>
+					<div class="card-text">
+					{{ form_start(form) }}
+			    	{{ form_row(form.email) }}
+			    	{{ form_row(form.username) }}
+			    	{{ form_row(form.country) }}
+			    	{{ form_row(form.password) }}
+			    	{{ form_row(form.confirm_password) }}
+			    	<button type="submit" class="btn btn-primary">Submit</button>
+			    	{{ form_end(form) }}
+			    	</div>
+	    		</div>
+			</div>
+    	<hr>
+		</div>
+	</div>
+{% endblock %}

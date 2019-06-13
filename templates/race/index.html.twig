@@ -1,0 +1,33 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}All Races{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-hover" id="ranking">
+                            <thead>
+                            <th>Races</th>
+                            </thead>
+                            <tbody>
+                            {% for race in races %}
+                                <tr class="table-light">
+                                    <td>{{ race.name }}</td>
+                                    <td><a class="btn btn-primary" href="{{ path('race_edit', {id: race.id}) }}">Edit</a></td>
+                                </tr>
+                            {% else %}
+                                <tr class="table-light">
+                                    <td>No Records</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-3 col-md-3 mx-auto">
+            <form action="{{ path('ranking') }}" method="post">
+                <div class="form-group">
+                <label for="filter-racer">Choose a racer:</label>
+                <select id="filter-racer" name="filter['racer']" class="form-control">
+                    <option value="">--Please choose a racer--</option>
+                    {% for racer in racers %}
+                    <option value="{{ racer.name }}">{{ racer.name }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+                <div class="form-group">
+                <label for="filter-race">Choose a race:</label>
+                <select id="filter-race" name="filter['race']" class="form-control">
+                    <option value="">--Please choose a race--</option>
+                    {% for race in races %}
+                    <option value="{{ race.name }}">{{ race.name }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+                <div class="form-group">
+                <label for="filter-player">Type a player:</label>
+                <input id="filter-player" name="filter['player']" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-9 col-md-9 mx-auto">
+            <table class="table table-hover responsive" id="ranking">
+                <thead>
+                <th>Country</th>
+                <th>Player</th>
+                <th>Racer</th>
+                <th>Race</th>
+                <th>Time</th>
+                <th>Crash</th>
+                <th>Video</th>
+                </thead>
+                <tbody>
+                {% for bestlap in bestlaps %}
+                    <tr class="table-light">
+                        <td><img src="{{ asset('images/countries/' ~ bestlap.player.country.image) }}"></td>
+                        <td class="racer-name">{{ bestlap.player.username }}</td>
+                        <td><img class="racer-img" src="{{ asset('images/racers/' ~ bestlap.racer.image) }}"></td>
+                        <td class="racer-name">{{ bestlap.race.name }}</td>
+                        <td>{{ bestlap.time }}</td>
+                        <td>{{ bestlap.crash }}</td>
+                        <td><iframe src="{{bestlap.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+                    </tr>
+                {% else %}
+                <tr class="table-light">
+                    <td>No Records</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+    $(document).ready( function () {
+        $('#ranking').DataTable({
+            responsive: {
+                details: false
+            }
+        });
+    } );
+    </script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of records{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12 col-md-12 mx-auto">
+
+    	<table class="table table-hover" id="ranking">
+            <thead>
+    		  <th>Racer</th>
+    		  <th>Race</th>
+    		  <th>Time</th>
+    		  <th>Crash</th>
+    		  <th>Video</th>
+              <th></th>
+            </thead>
+            <tbody>
+    		{% for bestlap in bestlaps %}
+    			<tr class="table-light">
+    				<td class="racer-name">{{ bestlap.racer.name }}</td>
+    				<td>{{ bestlap.race.name }}</td>
+    				<td>{{ bestlap.time }}</td>
+    				<td>{{ bestlap.crash }}</td>
+    				<td><iframe src="{{bestlap.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    				{% if app.user == bestlap.player %}
+    					<td><a class="btn btn-primary" href="{{ path('bestlap_edit', {id: bestlap.id}) }}">Edit</a></td>
+    				{% endif %}
+    			</tr>
+    		{% else %}
+			<tr class="table-light">
+    			<td>No Records</td>
+			</tr>
+    		{% endfor %}
+    		</tbody>
+    	</table>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script>
+    $(document).ready( function () {
+    $('#ranking').DataTable();
+    } );
+    </script>
+{% endblock %}

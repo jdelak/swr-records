@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}STAR WARS RACER RECORDS{% endblock %}</title>
+		<link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
+		<link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+		<link rel="icon" sizes="32x32" href="{{ asset('images/favicon-32.png') }}" type="image/png">
+		<link rel="icon" sizes="64x64" href="{{ asset('images/favicon-64.png') }}" type="image/png">
+		<link rel="icon" sizes="96x96" href="{{ asset('images/favicon-96.png') }}" type="image/png">
+		<link rel="apple-touch-icon" sizes="152x152" href="{{ asset('images/apple-touch-icon.png') }}">
+		<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('images/apple-touch-icon-60x60.png') }}">
+		<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('images/apple-touch-icon-76x76.png') }}">
+		<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('images/apple-touch-icon-114x114.png') }}">
+		<link rel="apple-touch-icon" sizes="120x120" href="{{ asset('images/apple-touch-icon-120x120.png') }}">
+		<link rel="apple-touch-icon" sizes="144x144" href="{{ asset('images/apple-touch-icon-144x144.png') }}">
+		<link rel="icon" sizes="196x196" href="{{ asset('images/favicon-196.png') }}" type="image/png">
+		<meta name="msapplication-TileImage" content="{{ asset('images/favicon-144.png') }}">
+		<meta name="msapplication-TileColor" content="#FFFFFF">
+        {% block stylesheets %}
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <link href='{{ asset('css/style.css') }}' rel='stylesheet' type='text/css'>
+        <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+
+        	{% block header %}
+        	<div class="container">
+        	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			  <a class="navbar-brand" href="{{ path('front') }}"><img src="{{ asset('images/swr-records.png') }}" alt="swr-records.net"></a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <div class="collapse navbar-collapse" id="navbarColor02">
+			    <ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('ranking') }}">Ranking</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('top') }}">Top Tiers</a>
+					</li>
+		    		<li class="nav-item">
+			        	<a class="nav-link" href="{{ path('about') }}">How to be Ranked ?</a>
+			      	</li>
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('bestlap') }}">My Records</a>
+						</li>
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN') %}
+			      	<li class="nav-item">
+				        <a class="nav-link" href="{{ path('dashboard') }}">Dashboard</a>
+			      	</li>
+			      	{% endif %}
+			    </ul>
+			    
+			    <span class="navbar-text">
+			    	{% if not app.user %}
+      				<a class="btn btn-primary" href="{{ path('security_login') }}">Login</a> / <a class="btn btn-secondary" href="{{ path('security_registration') }}">Register</a>
+      				{% else %}
+      				<a class="btn btn-primary" href="{{ path('bestlap_add') }}">Upload a BestLap</a>
+      				<a class="btn btn-secondary" href="{{ path('security_logout') }}">Logout</a>
+      				{% endif %}
+    			</span>
+			  </div>
+			</nav>
+			</div>
+        	{% endblock %}
+
+        	{% block message %}
+	        	{% for message in app.flashes('success') %}
+		            <div class="alert alert-success">
+		                {{ message }}
+		            </div>
+		        {% endfor %}
+
+		         {% for message in app.flashes('warning') %}
+		            <div class="alert alert-warning">
+		                {{ message }}
+		            </div>
+		        {% endfor %}
+
+		         {% for message in app.flashes('danger') %}
+		            <div class="alert alert-danger">
+		                {{ message }}
+		            </div>
+		        {% endfor %}
+        	{% endblock %}
+        	<br>
+
+        	<div class="container" id="body-content">
+		        {% block content %}
+		        {% endblock %}
+    		</div>
+        {% block footer %}
+		<div class="container">
+        	<footer>
+
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						Copyright &copy; 2019 SWR-RECORDS
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 text-right">
+						Designed by <a href="http://delakdev.fr" target="_blank">DelakDev</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+        {% endblock %}
+
+        {% endblock %}
+        <script type = 'text/javascript' src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+        {% block javascripts %}
+        
+        {% endblock %}
+    </body>
+</html>

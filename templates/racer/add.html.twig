@@ -1,0 +1,22 @@
+{% extends 'admin/dashboard.html.twig' %}
+{% block title %}Add a Racer{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+	<div class="animated fadeIn">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="card">
+					<div class="card-body">
+						<h1>Add a Racer</h1>
+						{{ form_start(form) }}
+						{{ form_row(form.name) }}
+						{{ form_row(form.imageFile) }}
+						<button type="submit" class="btn btn-primary">Submit</button>
+						{{ form_end(form) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

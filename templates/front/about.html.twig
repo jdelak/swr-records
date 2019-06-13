@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-lg-12 col-md-12 mx-auto">
+		<div class="jumbotron">
+			<h1 class="display-3">How to be ranked ?</h1>
+			<p class="lead">
+				First download this <a href="{{ asset('downloads/FULL-STATS.zip') }}">zip file</a> containing all races and podracers unlocked with full stats.<br>
+				You have to rename 'USER01.sav' with 'yournickname.sav'.<br>
+				After open the 2 files in <a href="https://hexed.it/" target="_blank">Hexedit</a> and replace all 'USER01' terms by 'yournickname' used when you play Star Wars Racer.<br>
+				Finally put them into your Star Wars Racer/data/player folder and start recording your races.
+			</p>
+			<p class="lead">
+				Second you need to <a href="{{ path('security_registration') }}">have an account</a> and <a href="{{ path('security_login') }}">logged-in</a> on swr-records.net.
+			</p>
+			<p class="lead">
+				Finally hit the 'Upload a BestLap', fill the form and submit it !
+			</p>
+			<hr class="my-4">
+		</div>
+	</div>
+</div>
+{% endblock %}

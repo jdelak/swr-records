@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}STAR WARS RACER RECORDS - Dashboard{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="{{ asset('css/cs-skin-elastic.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+</head>
+<body>
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{{ path('dashboard') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-map"></i>Races</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-map"></i><a href="{{ path('races') }}">All Races</a></li>
+                        <li><i class="fa fa-plus-square"></i><a href="{{ path ('race_add') }}">Add Race</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-space-shuttle"></i>Racers</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-space-shuttle"></i><a href="{{ path('racers') }}">All Racers</a></li>
+                        <li><i class="fa fa-plus-square"></i><a href="{{ path('racer_add') }}">Add Racer</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-ol"></i>Best Laps</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-list-ol"></i><a href="{{ path('admin_bestlap') }}">All Best Laps</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-check"></i>Tops Tiers</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-check"></i><a href="{{ path('admin_top') }}">All Top Tiers</a></li>
+                        <li><i class="fa fa-plus-square"></i><a href="{{ path('top_add') }}">Add Top Tiers</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Players</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-users"></i><a href="{{ path('players') }}">All Players</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+        <div class="top-left">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path('dashboard') }}"><img src="{{ asset('images/swr-records.png') }}" alt="swr records logo"></a>
+                <a class="navbar-brand hidden" href="{{ path('dashboard') }}"><img src="{{ asset('images/swr-records.png') }}" alt="swr records logo"></a>
+                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>
+
+    </header>
+    <!-- /#header -->
+    <!-- Content -->
+    <div class="content">
+        {% block content %}
+        <!-- Animated -->
+        <div class="animated fadeIn">
+            <!-- Widgets  -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-1">
+                                    <i class="pe-7s-users"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">{{ users }}</span></div>
+                                        <div class="stat-heading">Users</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-2">
+                                    <i class="pe-7s-medal"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">{{ bestlaps }}</span></div>
+                                        <div class="stat-heading">Best Laps</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Widgets -->
+        </div>
+        <!-- .animated -->
+        {% endblock content %}
+    </div>
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner bg-white">
+            <div class="row">
+                <div class="col-sm-6">
+                    Copyright &copy; 2019 SWR-RECORDS
+                </div>
+                <div class="col-sm-6 text-right">
+                    Designed by <a href="http://delakdev.fr" target="_blank">DelakDev</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- /.site-footer -->
+</div>
+<!-- /#right-panel -->
+
+<!-- Scripts -->
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+{% block javascripts %}
+
+{% endblock javascripts %}
+
+</body>
+</html>

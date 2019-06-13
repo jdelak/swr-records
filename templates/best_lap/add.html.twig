@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add a Best Lap{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12 col-md-12 mx-auto">
+    	<h1>Add a Best Lap</h1>
+    	{{ form_start(form) }}
+    	{{ form_row(form.race) }}
+    	{{ form_row(form.racer) }}
+		{{ form_row(form.time) }}
+    	{{ form_row(form.crash) }}
+    	{{ form_row(form.video) }}
+
+    	<button type="submit" class="btn btn-primary">Submit</button>
+		<hr>
+    	{{ form_end(form) }}
+
+	</div>
+
+</div>
+{% endblock %}

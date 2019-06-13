@@ -1,0 +1,18 @@
+vich_uploader:
+  db_driver: orm
+
+  mappings:
+    racers_image:
+      uri_prefix: /images/racers
+      upload_destination: '%kernel.project_dir%/public/images/racers'
+      inject_on_load: false
+      delete_on_update: true
+      delete_on_remove: true  
+    countries_image:
+      uri_prefix: /images/countries
+      upload_destination: '%kernel.project_dir%/public/images/countries'
+      inject_on_load: false
+      delete_on_update: true
+      delete_on_remove: true
+
+    
